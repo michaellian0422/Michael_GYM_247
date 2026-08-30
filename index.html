@@ -178,6 +178,7 @@
     .task strong, .task small { display: block; }
     .task small { margin-top: 3px; color: var(--muted); }
     .task:has(input:checked) strong { color: var(--muted); text-decoration: line-through; }
+    .task-link { display: inline-flex; margin-top: 10px; color: var(--ink); font-size: .88rem; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
     .today-footer { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
     .today-footer p { margin: 0; font-size: .9rem; }
 
@@ -544,7 +545,7 @@
       <div class="shell">
         <div class="section-intro">
           <h2>每星期留下一筆</h2>
-          <p>固定在星期日早上量度。體重與腰圍最少填一項，同一日期再次儲存會更新原有紀錄。</p>
+          <p>固定在星期日早上量度。腰圍必填，體重選填；同一日期再次儲存會更新原有紀錄。</p>
         </div>
         <div class="tracker-layout">
           <form class="measurement-form" id="measurement-form" novalidate>
@@ -559,8 +560,8 @@
                 <input id="measure-weight" name="weight" type="number" min="30" max="300" step="0.1" inputmode="decimal" placeholder="例如 69.0">
               </div>
               <div class="field">
-                <label for="measure-waist">腰圍 (cm)</label>
-                <input id="measure-waist" name="waist" type="number" min="30" max="250" step="0.1" inputmode="decimal" placeholder="肚臍水平">
+                <label for="measure-waist">腰圍 (cm，必填)</label>
+                <input id="measure-waist" name="waist" type="number" min="30" max="250" step="0.1" inputmode="decimal" placeholder="肚臍水平" required>
               </div>
               <div class="field full">
                 <label for="measure-note">備註</label>
@@ -627,7 +628,7 @@
       {
         day: "星期日", label: "重置", time: "早上 10 分鐘",
         normal: [
-          ["量腰圍及記錄", "同一位置、同一狀態比較"],
+          ["量腰圍並儲存紀錄", "到「紀錄」填寫腰圍後，這項會自動完成"],
           ["準備三款蛋白質食物", "乳酪、蛋、雞胸、奶或豆漿任選三款"],
           ["輕鬆行 20-30 分鐘", "只求活動，不追速度"]
         ],
@@ -715,12 +716,16 @@
     const weekStart = new Date(now);
     const dayFromMonday = (now.getDay() + 6) % 7;
     weekStart.setDate(now.getDate() - dayFromMonday);
+    weekStart.setHours(0, 0, 0, 0);
     const localDateKey = date => [
       date.getFullYear(),
       String(date.getMonth() + 1).padStart(2, "0"),
       String(date.getDate()).padStart(2, "0")
     ].join("-");
     const weekKey = localDateKey(weekStart);
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekEnd.getDate() + 6);
+    weekEnd.setHours(23, 59, 59, 999);
 
     const taskList = document.querySelector("#task-list");
     const title = document.querySelector("#today-title");
@@ -749,6 +754,23 @@
 
     function taskKey(dayIndex, mode, index) {
       return `${weekKey}-${dayIndex}-${mode}-${index}`;
+    }
+
+    function isDateInCurrentWeek(dateString) {
+      const date = new Date(`${dateString}T12:00:00`);
+      return !Number.isNaN(date.getTime()) && date >= weekStart && date <= weekEnd;
+    }
+
+    function hasCurrentWeekWaist() {
+      return state.measurements.some(record => {
+        const waist = Number(record.waist);
+        return record.waist !== null && record.waist !== "" && Number.isFinite(waist) && isDateInCurrentWeek(record.date);
+      });
+    }
+
+    function isTaskDone(dayIndex, mode, index) {
+      if (dayIndex === 0 && mode === "normal" && index === 0) return hasCurrentWeekWaist();
+      return Boolean(state.done[taskKey(dayIndex, mode, index)]);
     }
 
     function showToast(message) {
@@ -790,10 +812,19 @@
       });
 
       taskList.innerHTML = tasks.map((task, index) => {
-        const key = taskKey(selectedDay, mode, index);
+        const isMeasurementTask = selectedDay === 0 && mode === "normal" && index === 0;
+        const checked = isTaskDone(selectedDay, mode, index);
+        if (isMeasurementTask) {
+          return `
+            <div class="task">
+              <input type="checkbox" ${checked ? "checked" : ""} disabled aria-label="腰圍儲存狀態">
+              <span><strong>${task[0]}</strong><small>${task[1]}</small><a class="task-link" href="#tracking">去記錄腰圍</a></span>
+            </div>
+          `;
+        }
         return `
           <label class="task">
-            <input type="checkbox" data-task="${index}" ${state.done[key] ? "checked" : ""}>
+            <input type="checkbox" data-task="${index}" ${checked ? "checked" : ""}>
             <span><strong>${task[0]}</strong><small>${task[1]}</small></span>
           </label>
         `;
@@ -806,7 +837,7 @@
           saveState();
           updateCompletion();
           updateStrengthCount();
-          if (tasks.every((_, index) => state.done[taskKey(selectedDay, mode, index)])) {
+          if (tasks.every((_, index) => isTaskDone(selectedDay, mode, index))) {
             showToast("今日完成。現在可以安心收工。");
           }
         });
@@ -817,7 +848,7 @@
     function updateCompletion() {
       const mode = getMode(selectedDay);
       const tasks = plans[selectedDay][mode];
-      const count = tasks.filter((_, index) => state.done[taskKey(selectedDay, mode, index)]).length;
+      const count = tasks.filter((_, index) => isTaskDone(selectedDay, mode, index)).length;
       completionCopy.textContent = count === tasks.length ? "今日已完成。不要再額外加操。" : `已完成 ${count} / ${tasks.length}。完成一項已經比完全不做好。`;
     }
 
@@ -919,8 +950,8 @@
         measurementError.textContent = "請選擇量度日期。";
         return;
       }
-      if (weight === null && waist === null) {
-        measurementError.textContent = "體重與腰圍最少填一項。";
+      if (waist === null) {
+        measurementError.textContent = "請填寫本週腰圍。體重可以留空。";
         return;
       }
       if ((weight !== null && (weight < 30 || weight > 300)) || (waist !== null && (waist < 30 || waist > 250))) {
@@ -940,6 +971,7 @@
       else state.measurements.push(record);
       if (!saveState()) return;
       renderMeasurements();
+      renderToday();
       measurementForm.querySelector("#measure-weight").value = "";
       measurementForm.querySelector("#measure-waist").value = "";
       measurementForm.querySelector("#measure-note").value = "";
