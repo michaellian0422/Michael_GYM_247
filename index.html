@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151915">
+  <meta name="description" content="為朝九晚六及經常 OT 的瘦胖子而設，兩日力量訓練、OT 備用版與無火高蛋白餐單。">
+  <title>薄肌計劃 | 12 週下班行動表</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f2f4ef;
+      --surface: #e8ebe4;
+      --surface-strong: #dfe3da;
+      --ink: #171a17;
+      --muted: #5b625b;
+      --line: #c7cdc3;
+      --accent: #9ed36a;
+      --accent-ink: #17210f;
+      --dark: #151915;
+      --dark-ink: #eff4eb;
+      --danger: #a43f32;
+      --radius: 16px;
+      --shadow: 0 24px 70px rgba(30, 39, 28, .13);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111511;
+        --surface: #1a201a;
+        --surface-strong: #232b22;
+        --ink: #edf2e9;
+        --muted: #adb7a9;
+        --line: #374036;
+        --accent: #9ed36a;
+        --accent-ink: #17210f;
+        --dark: #e8eee4;
+        --dark-ink: #171a17;
+        --danger: #ef8d7d;
+        --shadow: 0 24px 70px rgba(0, 0, 0, .28);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "Noto Sans HK", "PingFang HK", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.05; letter-spacing: -.045em; }
+    h1 { margin-bottom: 18px; font-size: clamp(2.7rem, 8vw, 6rem); max-width: 9ch; }
+    h2 { margin-bottom: 14px; font-size: clamp(2rem, 4.8vw, 4rem); max-width: 14ch; }
+    h3 { margin-bottom: 8px; font-size: 1.22rem; letter-spacing: -.025em; }
+    p { color: var(--muted); }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    .shell { width: min(1180px, calc(100% - 32px)); margin-inline: auto; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { display: flex; align-items: baseline; gap: 10px; font-weight: 800; letter-spacing: -.04em; }
+    .brand-mark { color: var(--accent-ink); background: var(--accent); padding: 5px 9px; border-radius: 9px; }
+    .brand small { color: var(--muted); font-weight: 600; letter-spacing: 0; }
+    .nav-links { display: flex; align-items: center; gap: 24px; color: var(--muted); font-size: .92rem; font-weight: 700; }
+    .nav-links a:hover { color: var(--ink); }
+
+    .hero {
+      min-height: calc(100dvh - 68px);
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      align-items: center;
+      gap: clamp(28px, 5vw, 72px);
+      padding: clamp(42px, 7vh, 84px) 0;
+    }
+    .eyebrow {
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .hero-copy > p:not(.eyebrow) { max-width: 38ch; margin-bottom: 26px; font-size: clamp(1.06rem, 2vw, 1.22rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--ink);
+      border-radius: 12px;
+      padding: 11px 17px;
+      background: transparent;
+      color: var(--ink);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s ease, background-color .2s ease, color .2s ease;
+      white-space: nowrap;
+    }
+    .button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+    .button:hover { transform: translateY(-2px); }
+    .button:active { transform: translateY(1px) scale(.98); }
+    .button.secondary:hover { background: var(--ink); color: var(--bg); }
+    .hero-visual { position: relative; min-height: 560px; }
+    .hero-visual img { width: 100%; height: 100%; min-height: 560px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .photo-note {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      width: min(260px, calc(100% - 36px));
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: color-mix(in srgb, #151915 86%, transparent);
+      color: #eff4eb;
+      box-shadow: 0 12px 30px rgba(0,0,0,.2);
+    }
+    .photo-note strong { display: block; margin-bottom: 2px; }
+    .photo-note span { color: #cdd6c9; font-size: .87rem; }
+
+    section { padding: clamp(68px, 10vw, 120px) 0; }
+    .section-intro { margin-bottom: 32px; }
+    .section-intro p { max-width: 60ch; margin-bottom: 0; font-size: 1.05rem; }
+
+    .today-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 20px; align-items: start; }
+    .today-panel, .stat-panel, .meal-builder {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .today-panel { padding: clamp(22px, 4vw, 36px); }
+    .today-heading { display: flex; justify-content: space-between; gap: 20px; align-items: start; margin-bottom: 24px; }
+    .today-heading p { margin-bottom: 0; }
+    .date-chip { flex: 0 0 auto; padding: 7px 10px; border: 1px solid var(--line); border-radius: 10px; color: var(--muted); font-size: .82rem; font-weight: 800; }
+    .mode-switch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 22px; }
+    .mode-button {
+      min-height: 50px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .mode-button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+    .task-list { display: grid; gap: 10px; }
+    .task {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 13px;
+      align-items: start;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+    .task:last-child { border-bottom: 0; }
+    .task input { width: 21px; height: 21px; margin: 2px 0 0; accent-color: var(--accent); }
+    .task strong, .task small { display: block; }
+    .task small { margin-top: 3px; color: var(--muted); }
+    .task:has(input:checked) strong { color: var(--muted); text-decoration: line-through; }
+    .today-footer { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .today-footer p { margin: 0; font-size: .9rem; }
+
+    .side-stack { display: grid; gap: 20px; }
+    .stat-panel { padding: 24px; }
+    .stat-number { margin-bottom: 6px; font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 900; line-height: .95; letter-spacing: -.07em; }
+    .stat-panel p { margin: 0; }
+    .rule-panel { padding: 24px; border-radius: var(--radius); background: var(--dark); color: var(--dark-ink); }
+    .rule-panel p { color: color-mix(in srgb, var(--dark-ink) 72%, transparent); margin-bottom: 0; }
+
+    .day-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(145px, 1fr);
+      gap: 10px;
+      overflow-x: auto;
+      padding: 3px 3px 13px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
+    .day-card {
+      min-height: 130px;
+      padding: 15px;
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      scroll-snap-align: start;
+    }
+    .day-card[aria-selected="true"] { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+    .day-card span, .day-card strong, .day-card small { display: block; }
+    .day-card span { margin-bottom: 20px; color: var(--muted); font-size: .76rem; font-weight: 800; }
+    .day-card[aria-selected="true"] span, .day-card[aria-selected="true"] small { color: #354625; }
+    .day-card strong { margin-bottom: 5px; }
+    .day-card small { color: var(--muted); }
+
+    .workout-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 6vw, 80px); align-items: start; }
+    .workout-copy { position: sticky; top: 104px; }
+    .workout-copy p { max-width: 40ch; }
+    .workouts { display: grid; gap: 12px; }
+    details { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+    summary { padding: 20px 22px; display: flex; justify-content: space-between; gap: 16px; align-items: center; cursor: pointer; font-weight: 900; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--muted); font-size: 1.35rem; }
+    details[open] summary::after { content: "-"; }
+    .details-body { padding: 0 22px 22px; }
+    .exercise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .exercise { padding: 14px; border-radius: 12px; background: var(--surface-strong); }
+    .exercise strong, .exercise span { display: block; }
+    .exercise span { color: var(--muted); font-size: .88rem; }
+
+    .food-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 20px; align-items: stretch; }
+    .meal-builder { padding: clamp(22px, 4vw, 34px); }
+    .meal-list { display: grid; gap: 12px; margin: 22px 0; }
+    .meal { display: grid; grid-template-columns: 82px 1fr; gap: 15px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .meal:last-child { border-bottom: 0; }
+    .meal-time { color: var(--muted); font-size: .85rem; font-weight: 800; }
+    .meal strong { display: block; }
+    .meal small { color: var(--muted); }
+    .food-rules { min-height: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .food-rule { padding: 22px; border-radius: var(--radius); background: var(--surface-strong); }
+    .food-rule:nth-child(2) { background: var(--accent); color: var(--accent-ink); }
+    .food-rule:nth-child(2) p { color: #354625; }
+    .food-rule p { margin-bottom: 0; }
+
+    .tracker-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 20px; align-items: start; }
+    .measurement-form, .measurement-history {
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 22px 0; }
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: .88rem; font-weight: 800; }
+    .field input {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .field input::placeholder { color: var(--muted); opacity: .9; }
+    .field small { color: var(--muted); }
+    .form-error { min-height: 1.5em; margin: 10px 0 0; color: var(--danger); font-size: .88rem; font-weight: 700; }
+    .history-head { display: flex; justify-content: space-between; gap: 20px; align-items: start; margin-bottom: 20px; }
+    .history-head p { margin-bottom: 0; }
+    .history-list { display: grid; gap: 10px; }
+    .record {
+      display: grid;
+      grid-template-columns: minmax(96px, .7fr) 1fr 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 15px;
+      border-radius: 12px;
+      background: var(--surface-strong);
+    }
+    .record time { color: var(--muted); font-size: .82rem; font-weight: 800; }
+    .record strong, .record span { display: block; }
+    .record span { color: var(--muted); font-size: .8rem; }
+    .record-note { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+    .empty-records { padding: 28px 0; color: var(--muted); text-align: center; }
+    .sync-panel { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .sync-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .file-input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .storage-note { margin: 12px 0 0; font-size: .84rem; }
+
+    .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 36px; border-top: 1px solid var(--line); }
+    .time-block { padding: 24px 20px 0 0; }
+    .time-block time { display: block; margin-bottom: 12px; color: var(--muted); font-size: .82rem; font-weight: 800; }
+    .time-block p { margin-bottom: 0; }
+
+    .reset-box { display: grid; grid-template-columns: 1.05fr .95fr; gap: 20px; align-items: stretch; }
+    .reset-main { padding: clamp(28px, 5vw, 54px); border-radius: var(--radius); background: var(--dark); color: var(--dark-ink); }
+    .reset-main p { max-width: 46ch; color: color-mix(in srgb, var(--dark-ink) 72%, transparent); }
+    .reset-list { display: grid; gap: 10px; }
+    .reset-item { padding: 18px; border: 1px solid color-mix(in srgb, var(--dark-ink) 24%, transparent); border-radius: 12px; }
+    .safety { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); }
+    .safety p:last-child { margin-bottom: 0; }
+
+    footer { padding: 28px 0 100px; border-top: 1px solid var(--line); }
+    footer .shell { display: flex; justify-content: space-between; gap: 20px; align-items: baseline; }
+    footer p { margin: 0; font-size: .86rem; }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+      max-width: calc(100% - 36px);
+      padding: 13px 16px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 42px 0 64px; }
+      .hero-visual, .hero-visual img { min-height: 420px; }
+      .hero-copy { padding-inline: 2px; }
+      .today-grid, .workout-layout, .food-grid, .tracker-layout, .reset-box { grid-template-columns: 1fr; }
+      .workout-copy { position: static; }
+      .timeline { grid-template-columns: repeat(2, 1fr); row-gap: 26px; }
+    }
+
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 24px, 1180px); }
+      .brand small { display: none; }
+      h1 { font-size: clamp(2.65rem, 14vw, 4.2rem); }
+      .hero-actions .button { width: 100%; }
+      .hero-visual, .hero-visual img { min-height: 360px; }
+      .mode-switch { grid-template-columns: 1fr; }
+      .mode-button { min-height: 46px; }
+      .today-heading { display: block; }
+      .date-chip { display: inline-block; margin-top: 12px; }
+      .today-footer { align-items: start; flex-direction: column; }
+      .exercise-grid, .food-rules { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .record { grid-template-columns: 1fr 1fr; }
+      .record time { grid-column: 1 / -1; }
+      .meal { grid-template-columns: 68px 1fr; }
+      .timeline { grid-template-columns: 1fr; }
+      footer .shell { display: block; }
+      footer p + p { margin-top: 7px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav shell" aria-label="主選單">
+      <a class="brand" href="#top"><span class="brand-mark">薄肌</span><small>12 週下班計劃</small></a>
+      <div class="nav-links">
+        <a href="#today">今日</a>
+        <a href="#week">一星期</a>
+        <a href="#training">訓練</a>
+        <a href="#food">飲食</a>
+        <a href="#tracking">紀錄</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">69 kg / 170 cm / 朝九晚六</p>
+        <h1>少做一點，做足十二週。</h1>
+        <p>每週兩次力量訓練。OT 也有十二分鐘備用版。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#today">看今日行程</a>
+          <a class="button secondary" href="#training">看訓練內容</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="assets/after-work-dumbbell.jpg" width="1536" height="1024" alt="下班後在家用啞鈴做深蹲的男子" fetchpriority="high">
+        <div class="photo-note"><strong>最低門檻才是正計劃</strong><span>累的日子不用補償，只需縮短。</span></div>
+      </div>
+    </div>
+
+    <section id="today">
+      <div class="shell">
+        <div class="section-intro">
+          <h2>今晚只做這些</h2>
+          <p>先選你今晚的真實狀態。網站會記住勾選進度，下次打開仍然在。</p>
+        </div>
+        <div class="today-grid">
+          <article class="today-panel" aria-live="polite">
+            <div class="today-heading">
+              <div>
+                <h3 id="today-title">正在準備今日行程</h3>
+                <p id="today-copy">請稍候。</p>
+              </div>
+              <span class="date-chip" id="date-chip"></span>
+            </div>
+            <div class="mode-switch" role="group" aria-label="選擇今晚狀態">
+              <button class="mode-button" type="button" data-mode="normal" aria-pressed="true">正常放工</button>
+              <button class="mode-button" type="button" data-mode="ot" aria-pressed="false">今晚 OT</button>
+              <button class="mode-button" type="button" data-mode="social" aria-pressed="false">今晚有活動</button>
+            </div>
+            <div class="task-list" id="task-list"></div>
+            <div class="today-footer">
+              <p id="completion-copy">完成一項已經比完全不做好。</p>
+              <button class="button secondary" id="clear-day" type="button">重設今日</button>
+            </div>
+          </article>
+
+          <aside class="side-stack">
+            <div class="stat-panel">
+              <div class="stat-number" id="strength-count">0 / 2</div>
+              <h3>本週力量訓練</h3>
+              <p>兩次就合格。星期六只是補堂，不是第三次硬性功課。</p>
+            </div>
+            <div class="stat-panel">
+              <div class="stat-number">100-120g</div>
+              <h3>每日蛋白質方向</h3>
+              <p>不用每餐精算，先做到三餐各有一個清楚蛋白質來源。</p>
+            </div>
+            <div class="rule-panel">
+              <h3>不准連續缺席兩次</h3>
+              <p>缺一次很正常。下一個可用時段做 12 分鐘版，阻止中斷變成放棄。</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="week">
+      <div class="shell">
+        <div class="section-intro">
+          <h2>你的固定一星期</h2>
+          <p>力量訓練放在星期一及四，中間有足夠恢復。按日子可切換今日清單。</p>
+        </div>
+        <div class="day-strip" id="day-strip" role="tablist" aria-label="星期行程"></div>
+        <div class="timeline" aria-label="平日時間框架">
+          <div class="time-block"><time>07:45</time><h3>先吃蛋白質</h3><p>乳酪、蛋、奶或無糖豆漿，任何一款都可以。</p></div>
+          <div class="time-block"><time>12:45</time><h3>行十分鐘</h3><p>午餐後繞一圈，忙時拆成兩次五分鐘。</p></div>
+          <div class="time-block"><time>18:05</time><h3>只作一次決定</h3><p>正常、OT 或有活動。不要回家後再跟自己談判。</p></div>
+          <div class="time-block"><time>19:45</time><h3>開始或收工</h3><p>訓練日開做，非訓練日散步後便完成。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="training">
+      <div class="shell workout-layout">
+        <div class="workout-copy">
+          <h2>兩套全身訓練就夠</h2>
+          <p>每組做到還可以再做約兩下便停。當所有組都做到次數上限，下次才加最小重量。</p>
+          <p><strong>每次上限 45 分鐘。</strong> 熱身 5 分鐘，組間休息 60-90 秒。</p>
+        </div>
+        <div class="workouts">
+          <details open>
+            <summary>星期一 / 247 訓練 A / 40-45 分鐘</summary>
+            <div class="details-body">
+              <div class="exercise-grid">
+                <div class="exercise"><strong>腿推</strong><span>3 組 x 8-12 下</span></div>
+                <div class="exercise"><strong>器械胸推</strong><span>3 組 x 8-12 下</span></div>
+                <div class="exercise"><strong>高位下拉</strong><span>3 組 x 8-12 下</span></div>
+                <div class="exercise"><strong>啞鈴羅馬尼亞硬拉</strong><span>2 組 x 8-12 下</span></div>
+                <div class="exercise"><strong>平板支撐</strong><span>2 組 x 30-45 秒</span></div>
+              </div>
+            </div>
+          </details>
+          <details>
+            <summary>星期四 / 247 訓練 B / 40-45 分鐘</summary>
+            <div class="details-body">
+              <div class="exercise-grid">
+                <div class="exercise"><strong>高腳杯深蹲</strong><span>3 組 x 8-12 下</span></div>
+                <div class="exercise"><strong>坐姿滑輪划船</strong><span>3 組 x 8-12 下</span></div>
+                <div class="exercise"><strong>啞鈴肩推</strong><span>3 組 x 8-12 下</span></div>
+                <div class="exercise"><strong>臀推</strong><span>2 組 x 10-15 下</span></div>
+                <div class="exercise"><strong>側平板支撐</strong><span>每邊 2 組 x 20-30 秒</span></div>
+              </div>
+            </div>
+          </details>
+          <details>
+            <summary>OT 備用 / 家中啞鈴 / 12 分鐘</summary>
+            <div class="details-body">
+              <p>每個動作做 40 秒，休息 20 秒。做兩圈，不追重量。</p>
+              <div class="exercise-grid">
+                <div class="exercise"><strong>高腳杯深蹲</strong><span>控制下降</span></div>
+                <div class="exercise"><strong>地板啞鈴胸推</strong><span>手肘不要張太開</span></div>
+                <div class="exercise"><strong>單手啞鈴划船</strong><span>每圈換邊</span></div>
+                <div class="exercise"><strong>啞鈴羅馬尼亞硬拉</strong><span>背部保持中立</span></div>
+                <div class="exercise"><strong>原地快步</strong><span>最後一分鐘加速</span></div>
+              </div>
+            </div>
+          </details>
+          <details>
+            <summary>斜坡步行 / 星期三 / 20-25 分鐘</summary>
+            <div class="details-body">
+              <p>先平路熱身 3 分鐘，再用斜度 5-8%、速度約 4-5 km/h。以仍能說完整句子為準。</p>
+              <div class="exercise-grid">
+                <div class="exercise"><strong>初段</strong><span>斜度 5%，適應 5 分鐘</span></div>
+                <div class="exercise"><strong>主段</strong><span>斜度 5-8%，維持 12-17 分鐘</span></div>
+                <div class="exercise"><strong>收尾</strong><span>平路慢行 3 分鐘</span></div>
+                <div class="exercise"><strong>太辛苦時</strong><span>先減斜度，不需勉強扶實扶手</span></div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="food">
+      <div class="shell">
+        <div class="section-intro">
+          <h2>不煮飯也可以減肚腩</h2>
+          <p>先把蛋白質吃夠，再少一份液體熱量或宵夜。按一下可換一組外賣及便利店組合。</p>
+        </div>
+        <div class="food-grid">
+          <div class="meal-builder">
+            <h3>今日無火餐單</h3>
+            <div class="meal-list" id="meal-list"></div>
+            <button class="button primary" id="shuffle-meals" type="button">換一組餐單</button>
+          </div>
+          <div class="food-rules">
+            <article class="food-rule"><h3>每餐先找蛋白質</h3><p>雞、魚、蛋、豆腐、乳酪、奶或無糖豆漿。份量約一至兩個掌心。</p></article>
+            <article class="food-rule"><h3>只減一樣</h3><p>每日少一杯有糖飲品、少一份醬汁或少一次宵夜，不要一次戒清所有食物。</p></article>
+            <article class="food-rule"><h3>外賣次序</h3><p>先吃菜及肉，再吃飯。飯先留約四分一，仍然餓才吃完。</p></article>
+            <article class="food-rule"><h3>訓練後</h3><p>正常吃晚餐便可。太夜就選奶或豆漿加香蕉，不需要獎勵餐。</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tracking">
+      <div class="shell">
+        <div class="section-intro">
+          <h2>每星期留下一筆</h2>
+          <p>固定在星期日早上量度。體重與腰圍最少填一項，同一日期再次儲存會更新原有紀錄。</p>
+        </div>
+        <div class="tracker-layout">
+          <form class="measurement-form" id="measurement-form" novalidate>
+            <h3>新增每週量度</h3>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="measure-date">日期</label>
+                <input id="measure-date" name="date" type="date" required>
+              </div>
+              <div class="field">
+                <label for="measure-weight">體重 (kg)</label>
+                <input id="measure-weight" name="weight" type="number" min="30" max="300" step="0.1" inputmode="decimal" placeholder="例如 69.0">
+              </div>
+              <div class="field">
+                <label for="measure-waist">腰圍 (cm)</label>
+                <input id="measure-waist" name="waist" type="number" min="30" max="250" step="0.1" inputmode="decimal" placeholder="肚臍水平">
+              </div>
+              <div class="field full">
+                <label for="measure-note">備註</label>
+                <input id="measure-note" name="note" type="text" maxlength="80" placeholder="例如：本週完成兩課、昨晚食得較鹹">
+                <small>只記會幫你理解數字的事情。</small>
+              </div>
+            </div>
+            <button class="button primary" type="submit">儲存量度</button>
+            <p class="form-error" id="measurement-error" role="alert"></p>
+          </form>
+
+          <div class="measurement-history">
+            <div class="history-head">
+              <div><h3>量度紀錄</h3><p id="measurement-summary">尚未有紀錄</p></div>
+            </div>
+            <div class="history-list" id="measurement-history"></div>
+            <div class="sync-panel">
+              <h3>手機與電腦搬資料</h3>
+              <p>先在舊裝置匯出，再於新裝置匯入。匯入會合併紀錄，不會刪除新裝置已有資料。</p>
+              <div class="sync-actions">
+                <button class="button secondary" id="export-data" type="button">匯出備份</button>
+                <label class="button secondary" for="import-data">匯入備份</label>
+                <input class="file-input" id="import-data" type="file" accept="application/json,.json">
+              </div>
+              <p class="storage-note">每日勾選及量度會自動存在目前瀏覽器。清除瀏覽器資料前，請先匯出備份。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reset">
+      <div class="shell reset-box">
+        <div class="reset-main">
+          <h2>星期日只做重置</h2>
+          <p>身體重組看腰圍與力量，不只看體重。每週同一時間記錄一次，避免每日情緒被數字牽着走。</p>
+          <div class="reset-list">
+            <div class="reset-item"><strong>量腰圍</strong><br>肚臍水平，呼氣後自然站立。</div>
+            <div class="reset-item"><strong>看七日平均體重</strong><br>如沒有每天量，就固定每週一至三次早上量。</div>
+            <div class="reset-item"><strong>檢查兩次力量訓練</strong><br>完成就維持，未完成只調時間，不加懲罰。</div>
+          </div>
+        </div>
+        <aside class="safety">
+          <h3>先以 12 週為一期</h3>
+          <p>若腰圍慢慢下降、訓練重量上升，即使體重變化不大也代表方向正確。</p>
+          <p>若連續三週腰圍及平均體重都沒有變化，才再減一項高熱量飲品、醬汁或零食。</p>
+          <p><strong>安全提示：</strong>如有心血管、腎病、關節問題或正服藥，開始前先問醫生。運動中若胸痛、暈眩或出現尖銳痛楚，立即停止並求助。</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <p><strong>薄肌計劃</strong> / 為忙碌生活設計的最低有效版本</p>
+      <p>本頁屬一般健身資訊，不能取代醫療或營養診斷。</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const plans = [
+      {
+        day: "星期日", label: "重置", time: "早上 10 分鐘",
+        normal: [
+          ["量腰圍及記錄", "同一位置、同一狀態比較"],
+          ["準備三款蛋白質食物", "乳酪、蛋、雞胸、奶或豆漿任選三款"],
+          ["輕鬆行 20-30 分鐘", "只求活動，不追速度"]
+        ],
+        ot: [["做 5 分鐘重置", "記腰圍，再把一款蛋白質放進雪櫃"], ["今晚準時睡", "不補做上週訓練"]],
+        social: [["活動照常", "下一餐回到正常份量"], ["睡前喝水", "不因外食而斷食補償"]]
+      },
+      {
+        day: "星期一", label: "訓練 A", time: "19:45 / 247",
+        normal: [
+          ["18:05 決定直接去 247", "不要先回家坐下"],
+          ["完成訓練 A", "5 個動作，40-45 分鐘內離場"],
+          ["晚餐有一至兩掌心蛋白質", "飯量照常或留四分一"]
+        ],
+        ot: [["換衫並開 12 分鐘計時", "家中啞鈴兩圈"], ["完成第一圈", "累也可以只完成一圈"], ["喝奶或豆漿", "太夜就配香蕉或麵包"]],
+        social: [["午餐後行 10 分鐘", "保留最低活動量"], ["把訓練 A 移到星期六", "不是取消，只是改期"]]
+      },
+      {
+        day: "星期二", label: "恢復", time: "午飯後",
+        normal: [["午餐後行 10 分鐘", "能說完整句子的速度"], ["睡前活動 8 分鐘", "肩、髖及大腿後側輕鬆伸展"], ["三餐都有蛋白質", "不用計算卡路里"]],
+        ot: [["分兩次行 5 分鐘", "去洗手間或買水也算"], ["比平日早 20 分鐘放下手機", "恢復比加操重要"]],
+        social: [["活動照常", "走路已算今日有氧"], ["含糖飲品最多一杯", "之後轉水或無糖茶"]]
+      },
+      {
+        day: "星期三", label: "斜坡步行", time: "20:30 / 20-25 分鐘",
+        normal: [["斜坡步行 20-25 分鐘", "斜度 5-8%、約 4-5 km/h，仍能說完整句子"], ["準備明日運動衫", "放在袋內，減少明天決定"], ["晚餐先吃菜和肉", "飯最後才吃"]],
+        ot: [["離開座位行 8 分鐘", "回家後不用再操"], ["準備明日運動衫", "兩分鐘完成"]],
+        social: [["活動照常", "有走動便達標"], ["回家後直接休息", "保留明日訓練精神"]]
+      },
+      {
+        day: "星期四", label: "訓練 B", time: "19:45 / 247",
+        normal: [
+          ["18:05 決定直接去 247", "不等動力出現"],
+          ["完成訓練 B", "5 個動作，40-45 分鐘內離場"],
+          ["記下每個動作重量", "下次只進步一下或最小重量"]
+        ],
+        ot: [["換衫並開 12 分鐘計時", "家中啞鈴兩圈"], ["完成第一圈", "做到已算本週第二課"], ["正常吃晚餐", "不需要額外獎勵餐"]],
+        social: [["午餐後行 10 分鐘", "保留最低活動量"], ["把訓練 B 移到星期六", "星期六只補一次"]]
+      },
+      {
+        day: "星期五", label: "完全放鬆", time: "自由安排",
+        normal: [["午餐後行 10 分鐘", "保持坐得少一點"], ["今晚不用訓練", "休息是計劃一部分"], ["外食先選蛋白質", "再選真正想吃的配菜"]],
+        ot: [["每 90 分鐘站起來", "一分鐘也有效"], ["回家後直接休息", "不要深夜補操"]],
+        social: [["放心出席活動", "不要把一餐當成失敗"], ["酒精或甜飲後轉水", "明天照原計劃"]]
+      },
+      {
+        day: "星期六", label: "補堂或斜坡行", time: "下午自由時段",
+        normal: [["檢查本週是否完成兩課", "少一課才需要補堂"], ["未完成就做 247 或家中版", "已完成則斜坡步行 25-30 分鐘"], ["買下週蛋白質食物", "只買三至四款，避免浪費"]],
+        ot: [["做 12 分鐘家中版", "只在本週少了一課時做"], ["整理雪櫃 5 分鐘", "把方便食物放在最前"]],
+        social: [["活動照常", "步行多便不用額外有氧"], ["若本週少兩課，明日做 12 分鐘", "先救回連續性"]]
+      }
+    ];
+
+    const mealOptions = {
+      breakfast: [
+        ["早餐", "高蛋白乳酪 + 香蕉 + 一小把燕麥", "約 20-25g 蛋白質"],
+        ["早餐", "兩隻蛋 + 無糖豆漿 + 一份水果", "約 20g 蛋白質"],
+        ["早餐", "低脂奶 + 即食燕麥 + 一份乳酪", "約 20-25g 蛋白質"]
+      ],
+      lunch: [
+        ["午餐", "燒味雙拼選雞或瘦肉，走汁，飯留四分一", "約 30-40g 蛋白質"],
+        ["午餐", "海南雞飯去皮少汁，加一份菜", "約 30-35g 蛋白質"],
+        ["午餐", "日式魚或雞定食，飯減少少，醬汁分開", "約 30-40g 蛋白質"]
+      ],
+      dinner: [
+        ["晚餐", "便利店雞胸 + 沙律 + 飯糰 + 無糖豆漿", "約 35-45g 蛋白質"],
+        ["晚餐", "罐頭吞拿魚 + 即食飯 + 袋裝菜 + 牛奶", "約 35-40g 蛋白質"],
+        ["晚餐", "超市烤雞 + 沙律 + 微波薯仔或飯", "約 35-45g 蛋白質"]
+      ]
+    };
+
+    const stateKey = "lean-after-work-plan-v1";
+    let state;
+    try {
+      state = JSON.parse(localStorage.getItem(stateKey)) || { done: {}, modes: {}, meals: [0, 0, 0], measurements: [] };
+    } catch (error) {
+      state = { done: {}, modes: {}, meals: [0, 0, 0], measurements: [] };
+    }
+    state.done ||= {};
+    state.modes ||= {};
+    state.meals ||= [0, 0, 0];
+    state.measurements ||= [];
+
+    const now = new Date();
+    let selectedDay = now.getDay();
+    const weekStart = new Date(now);
+    const dayFromMonday = (now.getDay() + 6) % 7;
+    weekStart.setDate(now.getDate() - dayFromMonday);
+    const localDateKey = date => [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0")
+    ].join("-");
+    const weekKey = localDateKey(weekStart);
+
+    const taskList = document.querySelector("#task-list");
+    const title = document.querySelector("#today-title");
+    const copy = document.querySelector("#today-copy");
+    const dateChip = document.querySelector("#date-chip");
+    const completionCopy = document.querySelector("#completion-copy");
+    const strengthCount = document.querySelector("#strength-count");
+    const toast = document.querySelector("#toast");
+    const measurementForm = document.querySelector("#measurement-form");
+    const measurementError = document.querySelector("#measurement-error");
+    let toastTimer;
+
+    function saveState() {
+      try {
+        localStorage.setItem(stateKey, JSON.stringify(state));
+        return true;
+      } catch (error) {
+        showToast("未能儲存。請檢查瀏覽器私隱或儲存設定。");
+        return false;
+      }
+    }
+
+    function getMode(dayIndex) {
+      return state.modes[`${weekKey}-${dayIndex}`] || "normal";
+    }
+
+    function taskKey(dayIndex, mode, index) {
+      return `${weekKey}-${dayIndex}-${mode}-${index}`;
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function renderDayStrip() {
+      const strip = document.querySelector("#day-strip");
+      strip.innerHTML = plans.map((plan, index) => `
+        <button class="day-card" type="button" role="tab" aria-selected="${index === selectedDay}" data-day="${index}">
+          <span>${plan.day}</span>
+          <strong>${plan.label}</strong>
+          <small>${plan.time}</small>
+        </button>
+      `).join("");
+      strip.querySelectorAll(".day-card").forEach(button => {
+        button.addEventListener("click", () => {
+          selectedDay = Number(button.dataset.day);
+          renderAll();
+          document.querySelector("#today").scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    }
+
+    function renderToday() {
+      const plan = plans[selectedDay];
+      const mode = getMode(selectedDay);
+      const tasks = plan[mode];
+      const isActualToday = selectedDay === now.getDay();
+      title.textContent = `${isActualToday ? "今日" : plan.day}：${plan.label}`;
+      copy.textContent = mode === "normal" ? plan.time : mode === "ot" ? "最低有效版本，完成便收工。" : "活動優先，訓練改期但不取消。";
+      dateChip.textContent = isActualToday ? now.toLocaleDateString("zh-HK", { month: "numeric", day: "numeric", weekday: "short" }) : plan.day;
+
+      document.querySelectorAll(".mode-button").forEach(button => {
+        button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
+      });
+
+      taskList.innerHTML = tasks.map((task, index) => {
+        const key = taskKey(selectedDay, mode, index);
+        return `
+          <label class="task">
+            <input type="checkbox" data-task="${index}" ${state.done[key] ? "checked" : ""}>
+            <span><strong>${task[0]}</strong><small>${task[1]}</small></span>
+          </label>
+        `;
+      }).join("");
+
+      taskList.querySelectorAll("input").forEach(input => {
+        input.addEventListener("change", () => {
+          const key = taskKey(selectedDay, mode, Number(input.dataset.task));
+          state.done[key] = input.checked;
+          saveState();
+          updateCompletion();
+          updateStrengthCount();
+          if (tasks.every((_, index) => state.done[taskKey(selectedDay, mode, index)])) {
+            showToast("今日完成。現在可以安心收工。");
+          }
+        });
+      });
+      updateCompletion();
+    }
+
+    function updateCompletion() {
+      const mode = getMode(selectedDay);
+      const tasks = plans[selectedDay][mode];
+      const count = tasks.filter((_, index) => state.done[taskKey(selectedDay, mode, index)]).length;
+      completionCopy.textContent = count === tasks.length ? "今日已完成。不要再額外加操。" : `已完成 ${count} / ${tasks.length}。完成一項已經比完全不做好。`;
+    }
+
+    function completedPlan(dayIndex) {
+      const mode = getMode(dayIndex);
+      if (mode === "social") return false;
+      return Boolean(state.done[taskKey(dayIndex, mode, 1)]);
+    }
+
+    function updateStrengthCount() {
+      const count = [1, 4].filter(completedPlan).length;
+      strengthCount.textContent = `${count} / 2`;
+    }
+
+    function renderMeals() {
+      const groups = [mealOptions.breakfast, mealOptions.lunch, mealOptions.dinner];
+      document.querySelector("#meal-list").innerHTML = groups.map((group, index) => {
+        const meal = group[state.meals[index] % group.length];
+        return `<div class="meal"><div class="meal-time">${meal[0]}</div><div><strong>${meal[1]}</strong><small>${meal[2]}</small></div></div>`;
+      }).join("");
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;"
+      })[character]);
+    }
+
+    function renderMeasurements() {
+      const history = document.querySelector("#measurement-history");
+      const summary = document.querySelector("#measurement-summary");
+      const records = [...state.measurements].sort((a, b) => b.date.localeCompare(a.date));
+      if (!records.length) {
+        summary.textContent = "尚未有紀錄";
+        history.innerHTML = '<div class="empty-records">星期日量度後，紀錄會顯示在這裡。</div>';
+        return;
+      }
+
+      const latest = records[0];
+      const latestParts = [];
+      if (Number.isFinite(latest.weight)) latestParts.push(`${latest.weight.toFixed(1)} kg`);
+      if (Number.isFinite(latest.waist)) latestParts.push(`${latest.waist.toFixed(1)} cm 腰圍`);
+      summary.textContent = `最近：${latestParts.join(" / ")}`;
+      history.innerHTML = records.slice(0, 8).map(record => `
+        <article class="record">
+          <time datetime="${escapeHtml(record.date)}">${new Date(`${record.date}T12:00:00`).toLocaleDateString("zh-HK", { year: "numeric", month: "numeric", day: "numeric" })}</time>
+          <div><strong>${Number.isFinite(record.weight) ? `${record.weight.toFixed(1)} kg` : "未填"}</strong><span>體重</span></div>
+          <div><strong>${Number.isFinite(record.waist) ? `${record.waist.toFixed(1)} cm` : "未填"}</strong><span>腰圍</span></div>
+          ${record.note ? `<div class="record-note">${escapeHtml(record.note)}</div>` : ""}
+        </article>
+      `).join("");
+    }
+
+    function renderAll() {
+      renderDayStrip();
+      renderToday();
+      renderMeals();
+      renderMeasurements();
+      updateStrengthCount();
+    }
+
+    document.querySelectorAll(".mode-button").forEach(button => {
+      button.addEventListener("click", () => {
+        state.modes[`${weekKey}-${selectedDay}`] = button.dataset.mode;
+        saveState();
+        renderToday();
+        updateStrengthCount();
+      });
+    });
+
+    document.querySelector("#clear-day").addEventListener("click", () => {
+      const mode = getMode(selectedDay);
+      plans[selectedDay][mode].forEach((_, index) => delete state.done[taskKey(selectedDay, mode, index)]);
+      saveState();
+      renderToday();
+      updateStrengthCount();
+      showToast("已重設這一天。");
+    });
+
+    document.querySelector("#shuffle-meals").addEventListener("click", () => {
+      state.meals = state.meals.map((value, index) => (value + 1) % [mealOptions.breakfast, mealOptions.lunch, mealOptions.dinner][index].length);
+      saveState();
+      renderMeals();
+      showToast("已換成另一組方便餐單。");
+    });
+
+    measurementForm.addEventListener("submit", event => {
+      event.preventDefault();
+      measurementError.textContent = "";
+      const formData = new FormData(measurementForm);
+      const date = String(formData.get("date") || "");
+      const weightRaw = String(formData.get("weight") || "").trim();
+      const waistRaw = String(formData.get("waist") || "").trim();
+      const weight = weightRaw ? Number(weightRaw) : null;
+      const waist = waistRaw ? Number(waistRaw) : null;
+      const note = String(formData.get("note") || "").trim();
+
+      if (!date) {
+        measurementError.textContent = "請選擇量度日期。";
+        return;
+      }
+      if (weight === null && waist === null) {
+        measurementError.textContent = "體重與腰圍最少填一項。";
+        return;
+      }
+      if ((weight !== null && (weight < 30 || weight > 300)) || (waist !== null && (waist < 30 || waist > 250))) {
+        measurementError.textContent = "請檢查量度數值是否正確。";
+        return;
+      }
+
+      const existingIndex = state.measurements.findIndex(item => item.date === date);
+      const existingRecord = existingIndex >= 0 ? state.measurements[existingIndex] : null;
+      const record = {
+        date,
+        weight: weight ?? existingRecord?.weight ?? null,
+        waist: waist ?? existingRecord?.waist ?? null,
+        note: note || existingRecord?.note || ""
+      };
+      if (existingIndex >= 0) state.measurements[existingIndex] = record;
+      else state.measurements.push(record);
+      if (!saveState()) return;
+      renderMeasurements();
+      measurementForm.querySelector("#measure-weight").value = "";
+      measurementForm.querySelector("#measure-waist").value = "";
+      measurementForm.querySelector("#measure-note").value = "";
+      showToast(existingIndex >= 0 ? "已更新這天的量度。" : "量度已儲存在這個瀏覽器。");
+    });
+
+    document.querySelector("#export-data").addEventListener("click", () => {
+      const payload = { version: 1, exportedAt: new Date().toISOString(), state };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `thin-muscle-backup-${localDateKey(new Date())}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+      showToast("備份檔已匯出。請放到手機可存取的位置。");
+    });
+
+    document.querySelector("#import-data").addEventListener("change", async event => {
+      const input = event.currentTarget;
+      const file = input.files && input.files[0];
+      if (!file) return;
+      try {
+        const parsed = JSON.parse(await file.text());
+        const incoming = parsed.state || parsed;
+        if (!incoming || typeof incoming !== "object") throw new Error("Invalid backup");
+        state.done = { ...state.done, ...(incoming.done || {}) };
+        state.modes = { ...state.modes, ...(incoming.modes || {}) };
+        if (Array.isArray(incoming.meals)) state.meals = incoming.meals;
+        if (Array.isArray(incoming.measurements)) {
+          const merged = new Map(state.measurements.map(record => [record.date, record]));
+          incoming.measurements.forEach(record => {
+            if (record && /^\d{4}-\d{2}-\d{2}$/.test(record.date)) merged.set(record.date, record);
+          });
+          state.measurements = [...merged.values()];
+        }
+        if (!saveState()) return;
+        renderAll();
+        showToast("備份已匯入並合併。");
+      } catch (error) {
+        showToast("這個檔案不是有效的薄肌計劃備份。");
+      } finally {
+        input.value = "";
+      }
+    });
+
+    document.querySelector("#measure-date").value = localDateKey(now);
+
+    renderAll();
+  </script>
+</body>
+</html>
